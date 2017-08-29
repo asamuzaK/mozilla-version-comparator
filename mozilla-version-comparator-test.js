@@ -130,6 +130,26 @@ suite('The mozilla-version-comparator', function() {
     test('1.001.100 < 1.01.10', function() {
       expect(mozCompare('1.001.100', '1.01.10')).to.equal(-1);
     });
+
+    test('1.0.0-a < 1.0.0', function() {
+      expect(mozCompare('1.0.0-a', '1.0.0')).to.equal(-1);
+    });
+
+    test('1.0.0-a1 < 1.0.0-b1', function() {
+      expect(mozCompare('1.0.0-a1', '1.0.0-b1')).to.equal(-1);
+    });
+
+    test('1.0.0-a1 < 1.0.0-a2', function() {
+      expect(mozCompare('1.0.0-a1', '1.0.0-a2')).to.equal(-1);
+    });
+
+    test('1.0.0-a1a < 1.0.0-a1b', function() {
+      expect(mozCompare('1.0.0-a1a', '1.0.0-a1b')).to.equal(-1);
+    });
+
+    test('1.0.0-a1 < 1.0.0-a1-1', function() {
+      expect(mozCompare('1.0.0-a1', '1.0.0-a1-1')).to.equal(-1);
+    });
   });
 
   suite('is reflexive', function() {
@@ -245,7 +265,25 @@ suite('The mozilla-version-comparator', function() {
     test('1.01.10 > 1.001.100', function() {
       expect(mozCompare('1.01.10', '1.001.100')).to.equal(1);
     });
+
+    test('1.0.0 > 1.0.0-a', function() {
+      expect(mozCompare('1.0.0', '1.0.0-a')).to.equal(1);
+    });
+
+    test('1.0.0-b1 > 1.0.0-a1', function() {
+      expect(mozCompare('1.0.0-b1', '1.0.0-a1')).to.equal(1);
+    });
+
+    test('1.0.0-a2 > 1.0.0-a1', function() {
+      expect(mozCompare('1.0.0-a2', '1.0.0-a1')).to.equal(1);
+    });
+
+    test('1.0.0-a1b > 1.0.0-a1a', function() {
+      expect(mozCompare('1.0.0-a1b', '1.0.0-a1a')).to.equal(1);
+    });
+
+    test('1.0.0-a1-1 > 1.0.0-a1', function() {
+      expect(mozCompare('1.0.0-a1-1', '1.0.0-a1')).to.equal(1);
+    });
   });
 });
-
-
