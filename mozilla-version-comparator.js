@@ -48,7 +48,7 @@ const parseVersionParts = function(versionPart) {
       }
     }
   }
-
+  console.log(result);
   return result;
 };
 

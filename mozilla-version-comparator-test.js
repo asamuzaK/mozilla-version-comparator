@@ -150,6 +150,14 @@ suite('The mozilla-version-comparator', function() {
     test('1.0.0-a1 < 1.0.0-a1-1', function() {
       expect(mozCompare('1.0.0-a1', '1.0.0-a1-1')).to.equal(-1);
     });
+
+    test('1.0.0-1 < 1.0.0', function() {
+      expect(mozCompare('1.0.0-1', '1.0.0')).to.equal(-1);
+    });
+
+    test('1.0.0-1 < 1.0.0-a', function() {
+      expect(mozCompare('1.0.0-1', '1.0.0-a')).to.equal(-1);
+    });
   });
 
   suite('is reflexive', function() {
@@ -284,6 +292,35 @@ suite('The mozilla-version-comparator', function() {
 
     test('1.0.0-a1-1 > 1.0.0-a1', function() {
       expect(mozCompare('1.0.0-a1-1', '1.0.0-a1')).to.equal(1);
+    });
+
+    test('1.0.0 > 1.0.0-1', function() {
+      expect(mozCompare('1.0.0', '1.0.0-1')).to.equal(1);
+    });
+
+    test('1.0.0-a > 1.0.0-1', function() {
+      expect(mozCompare('1.0.0-a', '1.0.0-1')).to.equal(1);
+    });
+
+    // Additional test
+    test('Toolkit1 1.0.0-1 < 1.0.0-2', function() {
+      expect(mozCompare('1.0.0-1', '1.0.0-2')).to.equal(-1);
+    });
+
+    test('Toolkit2 1.0.0-2 < 1.0.0-10', function() {
+      expect(mozCompare('1.0.0-2', '1.0.0-10')).to.equal(-1);
+    });
+
+    test('Toolkit3 1.0.0-10 < 1.0.0-a', function() {
+      expect(mozCompare('1.0.0-10', '1.0.0-a')).to.equal(-1);
+    });
+
+    test('Toolkit4 1.0.0-10 < 1.0.0', function() {
+      expect(mozCompare('1.0.0-10', '1.0.0')).to.equal(-1);
+    });
+
+    test('Toolkit5 1.0.0-a < 1.0.0', function() {
+      expect(mozCompare('1.0.0-a', '1.0.0')).to.equal(-1);
     });
   });
 });
